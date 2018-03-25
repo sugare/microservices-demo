@@ -1,0 +1,21 @@
+server:
+  port: 8763
+
+spring:
+  application:
+    name: ribbon-hystrix
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_SERVICE_HOST:localhost}:${EUREKA_SERVER_SERVICE_PORT:8761}/eureka/
+      #defaultZone: http://192.168.16.91:31423/eureka/
+  
+  instance: 
+      prefer-ip-address: true
+      hostname: ${RIBBON_HYSTRIX_SERVICE_HOST:localhost}
+      instanceId: ${spring.application.name}-${random.int}
+      
+management:
+  security:
+    enabled: false

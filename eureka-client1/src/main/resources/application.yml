@@ -1,0 +1,25 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: eureka-client
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/sell?characterEncoding=utf-8&useSSL=false
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_SERVICE_HOST:localhost}:${EUREKA_SERVER_SERVICE_PORT:8761}/eureka/
+  
+  instance: 
+      prefer-ip-address: true
+      hostname: ${EUREKA_CLIENT_SERVICE_HOST:localhost}
+      # instanceId: ${spring.application.name}:${server.port}-${random.int}
+      instanceId: ${spring.application.name}-${random.int}
+management:
+  security:
+    enabled: false

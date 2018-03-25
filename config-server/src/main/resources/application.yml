@@ -1,0 +1,33 @@
+server:
+  port: 8798
+spring:
+  application:
+    name: config-server
+  cloud:
+    config: 
+      server:
+        git:
+          uri: https://github.com/sugare/SpringcloudConfig
+          search-paths:
+          - respo
+      label: master
+#  rabbitmq:
+#    host: 192.168.20.72
+#    port: 32771
+#    username: guest
+#    password: guest
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_SERVICE_HOST:localhost}:${EUREKA_SERVER_SERVICE_PORT:8761}/eureka/
+  
+  instance: 
+      prefer-ip-address: true
+      hostname: ${CONFIG_SERVER_SERVICE_HOST:localhost}
+      # instanceId: ${spring.application.name}:${server.port}-${random.int}
+      instanceId: ${spring.application.name}-${random.int}
+      
+management:
+  security:
+    enabled: false

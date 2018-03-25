@@ -1,0 +1,21 @@
+server:
+  port: 9412
+  
+spring: 
+  application:
+    name: zipkin-client
+  zipkin:
+    base-url: http://${ZIPKIN_SERVER_SERVICE_HOST:localhost}:${ZIPKIN_SERVER_SERVICE_PORT:9411}
+  sleuth:
+    sampler:
+      percentage: 1.0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_SERVICE_HOST:localhost}:${EUREKA_SERVER_SERVICE_PORT:8761}/eureka/
+  
+  instance: 
+      prefer-ip-address: true
+      hostname: ${ZIPKIN_CLIENT_SERVICE_HOST:localhost}
+      instanceId: ${spring.application.name}-${random.int}
+      

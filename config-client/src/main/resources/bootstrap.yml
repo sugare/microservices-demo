@@ -1,0 +1,28 @@
+server:
+  port: 8799
+spring:
+  application: 
+    name: config-client
+  cloud: 
+    config:
+      name: config-client
+      #name: config-client
+      profile: dev
+      label: master
+      #uri: http://localhost:8798/
+      uri: http://${CONFIG_SERVER_SERVICE_HOST:localhost}:${CONFIG_SERVER_SERVICE_PORT:8798}
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_SERVICE_HOST:localhost}:${EUREKA_SERVER_SERVICE_PORT:8761}/eureka/
+  instance: 
+      prefer-ip-address: true
+      hostname: ${CONFIG_CLIENT_SERVICE_HOST:localhost}
+      # instanceId: ${spring.application.name}:${server.port}-${random.int}
+      instanceId: ${spring.application.name}-${random.int}
+      
+management:
+  security:
+    enabled: false
+ 

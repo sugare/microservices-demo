@@ -1,0 +1,26 @@
+server:
+  port: 8764
+
+spring:
+  application:
+    name: feign-hystrix
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_SERVICE_HOST:localhost}:${EUREKA_SERVER_SERVICE_PORT:8761}/eureka/
+      #defaultZone: http://192.168.16.91:31423/eureka/
+  
+  instance: 
+      prefer-ip-address: true
+      hostname: ${FEIGN_HYSTRIX_SERVICE_HOST:localhost}
+      instanceId: ${spring.application.name}-${random.int}
+      
+management:
+  security:
+    enabled: false
+    
+feign:
+  hystrix:
+    enabled: true
+    

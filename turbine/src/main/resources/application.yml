@@ -1,0 +1,26 @@
+server:
+  port: 8766
+
+spring:
+  application:
+    name: turbine
+
+eureka:
+  client:
+    serviceUrl:
+      # defaultZone: http://localhost:8761/eureka
+      defaultZone: http://${EUREKA_SERVER_SERVICE_HOST:localhost}:${EUREKA_SERVER_SERVICE_PORT:8761}/eureka/
+  instance: 
+      prefer-ip-address: true
+      hostname: ${TURBINE_SERVICE_HOST:localhost}
+      instanceId: ${spring.application.name}-${random.int}
+    
+management:
+  security:
+    enabled: false
+
+turbine:
+  appConfig: ribbon-hystrix, feign-hystrix
+  aggregator:
+    clusterConfig: default
+  cluster-name-expression: new String("default")

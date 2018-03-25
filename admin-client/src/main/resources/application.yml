@@ -1,0 +1,15 @@
+server:
+  port: 8789
+
+spring:
+  boot:
+    admin:
+      url: http://${ADMIN_SERVER_SERVICE_HOST:localhost}:${ADMIN_SERVER_SERVICE_PORT:8788}
+      # url: http://${ADMIN_SERVER_SERVICE_HOST:localhost}:${ADMIN_SERVER_SERVICE_PORT:8788}
+      # url: http://11.11.110.87:32410
+      client: 
+        prefer-ip: true
+      
+management: 
+  security: 
+    enabled: false
