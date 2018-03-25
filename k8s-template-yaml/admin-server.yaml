@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: admin-server
+  labels:
+    app: admin-server
+spec:
+  template:
+    metadata:
+      name: admin-server
+      labels:
+        app: admin-server
+    spec:
+      containers:
+      - name: admin-server
+        image: cargo.caicloudprivatetest.com/caicloud/admin-server:v4
+        ports:
+        - containerPort: 8788
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: admin-server
+spec:
+  type: NodePort
+  ports:
+  - port: 8788
+    targetPort: 8788
+    #nodePort: 30061
+  selector:
+    app: admin-server

@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: config-client
+  labels:
+    app: config-client
+spec:
+  template:
+    metadata:
+      name: config-client
+      labels:
+        app: config-client
+    spec:
+      containers:
+      - name: config-client
+        image: cargo.caicloudprivatetest.com/caicloud/config-client:v4
+        ports:
+        - containerPort: 8799
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-client
+spec:
+  type: NodePort
+  ports:
+  - port: 8799
+    targetPort: 8799
+    #nodePort: 30061
+  selector:
+    app: config-client

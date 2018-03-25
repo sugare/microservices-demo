@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bus-client1
+  labels:
+    app: bus-client1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: bus-client1
+      labels:
+        app: bus-client1
+    spec:
+      containers:
+      - name: bus-client1
+        image: cargo.caicloudprivatetest.com/caicloud/bus-client:v5
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8711
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bus-client1
+spec:
+  type: NodePort
+  ports:
+  - port: 8711
+    targetPort: 8711
+    #nodePort: 30061
+  selector:
+    app: bus-client1

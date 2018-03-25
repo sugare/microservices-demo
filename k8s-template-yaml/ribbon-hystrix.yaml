@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ribbon-hystrix
+  labels:
+    app: ribbon
+spec:
+  template:
+    metadata:
+      name: ribbon
+      labels:
+        app: ribbon
+    spec:
+      containers:
+      - name: ribbon
+        image: cargo.caicloudprivatetest.com/caicloud/ribbon-hystrix:v4
+        ports:
+        - containerPort: 8763
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ribbon-hystrix
+spec:
+  type: NodePort
+  ports:
+  - port: 8763
+    targetPort: 8763
+    #nodePort: 30061
+  selector:
+    app: ribbon
