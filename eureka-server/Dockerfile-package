@@ -1,9 +1,0 @@
-FROM 192.168.7.123/poc/maven
-
-LABEL maintainer "sugare"
-
-WORKDIR /project
-ADD . /project
-
-#RUN mvn package
-CMD ["mvn"]
